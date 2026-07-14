@@ -6,11 +6,12 @@ class LogoutPage {
     this.profileDropdown = page.locator("a.tb-signet");
 
     // Logout link
-    this.logoutButton = page.getByRole("link", { name: "Logout" });
+    this.logoutButton = page.locator('a[href*="/site/logout"]');
   }
 
   async logout() {
     // Open the dropdown
+    
     await this.profileDropdown.click();
 
     // Click Logout
