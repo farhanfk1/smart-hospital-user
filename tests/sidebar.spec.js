@@ -1,6 +1,6 @@
 const { test } = require("@playwright/test");
-const LoginPage = require("../page/LoginPage");
-const SidebarPage = require("../page/SidebarPage");
+const LoginPage = require("../page/loginPage");
+const SidebarPage = require("../page/sidebarPage");
 const sidebarData = require("../test-data/sidebarData");
 
 test("Verify Patient Sidebar Navigation", async ({ page }) => {
