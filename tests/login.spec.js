@@ -1,12 +1,7 @@
-const { test, expect } = require("@playwright/test");
-const LoginPage = require("../page/loginPage");
+const { test, expect } = require("../fixtures/loginFixture");
 
-test('User login', async ({ page }) => {
-  const loginPage = new LoginPage(page);
+test('User login', async ({ loggedInPage }) => {
 
-  await loginPage.open();
-  
-  await loginPage.login();
-  await expect(page).toHaveURL(/patient\/dashboard/);
+  await expect(loggedInPage).toHaveURL(/patient\/dashboard/);
 
 })

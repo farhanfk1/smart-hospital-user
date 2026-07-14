@@ -1,14 +1,12 @@
-const { test } = require("@playwright/test");
-const LoginPage = require("../page/loginPage");
+const { test, expect } = require("../fixtures/loginFixture");
+
 const SidebarPage = require("../page/sidebarPage");
 const sidebarData = require("../test-data/sidebarData");
 
-test("Verify Patient Sidebar Navigation", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  const sidebar = new SidebarPage(page);
+test("Verify Patient Sidebar Navigation", async ({ loggedInPage }) => {
+  const sidebar = new SidebarPage(loggedInPage);
 
-  await loginPage.open();
-  await loginPage.login();
+
 
   for (const item of sidebarData.Patient) {
     console.log(`Opening: ${item.menu}`);
