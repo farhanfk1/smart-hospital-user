@@ -11,6 +11,26 @@ class DashboardPage {
 
     // Book Appointment button
     this.bookAppointmentButton = page.locator("a.btn-pulse");
+
+    // Medical History
+   this.medicalHistoryHeading = page.getByText("Medical History", {
+     exact: true,
+   });
+
+    this.medicalHistoryChart = page.locator("#medical-history-chart");
+
+    // Upcoming Appointments
+    this.upcomingAppointmentsHeading = page.getByRole("heading", {
+      name: "Upcoming Appointments",
+    });
+
+    this.viewAllButton = page.getByRole("link", {
+      name: "View All",
+    });
+
+    this.bookAppointmentButton = page.getByRole("link", {
+      name: /Book Appointment/,
+    }).last();
   }
 
   async verifyDashboard() {
@@ -34,6 +54,32 @@ class DashboardPage {
 
     console.log(`Opened: ${cardName}`);
   }
+
+ // Verify Medical History Graph
+  async verifyMedicalHistory() {
+    await expect(this.medicalHistoryHeading).toBeVisible();
+    await expect(this.medicalHistoryChart).toBeVisible();
+  }
+
+  // Verify Upcoming Appointments Section
+  async verifyUpcomingAppointments() {
+    await expect(this.upcomingAppointmentsHeading).toBeVisible();
+  }
+
+  // Click View All
+  async clickViewAll() {
+    await this.viewAllButton.click();
+    await expect(this.page).toHaveURL(/patient\/dashboard\/appointment/);
+  }
+
+  // Click Book Appointment
+  async clickBookAppointmentFromWidget() {
+    await this.bookAppointmentButton.click();
+    await expect(this.page).toHaveURL(/patient\/dashboard\/appointment/);
+  }
 }
+
+
+
 
 module.exports = DashboardPage;

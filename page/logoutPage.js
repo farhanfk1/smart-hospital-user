@@ -15,6 +15,9 @@ class LogoutPage {
    
     await this.profileDropdown.click();
 
+    // Wait until dropdown is open
+    await expect(this.logoutButton).toBeVisible();
+
     // Click Logout
     await this.logoutButton.click();
 
