@@ -13,9 +13,9 @@ class DashboardPage {
     this.bookAppointmentButton = page.locator("a.btn-pulse");
 
     // Medical History
-   this.medicalHistoryHeading = page.getByText("Medical History", {
-     exact: true,
-   });
+    this.medicalHistoryHeading = page.getByText("Medical History", {
+      exact: true,
+    });
 
     this.medicalHistoryChart = page.locator("#medical-history-chart");
 
@@ -28,9 +28,24 @@ class DashboardPage {
       name: "View All",
     });
 
-    this.bookAppointmentButton = page.getByRole("link", {
-      name: /Book Appointment/,
-    }).last();
+    this.bookAppointmentButton = page
+      .getByRole("link", {
+        name: /Book Appointment/,
+      })
+      .last();
+    // Top 10 Findings
+    this.top10FindingsHeading = page.getByText("Top 10 Findings", {
+      exact: true,
+    });
+
+    this.top10FindingsChart = page.locator("#finding-bar-chart");
+
+    // Top 10 Symptoms
+    this.top10SymptomsHeading = page.getByText("Top 10 Symptoms", {
+      exact: true,
+    });
+
+    this.top10SymptomsChart = page.locator("#symptom-bar-chart");
   }
 
   async verifyDashboard() {
@@ -42,9 +57,9 @@ class DashboardPage {
     await expect(this.page).toHaveURL(/patient\/dashboard\/appointment/);
   }
 
-  // for dashboard 
+  // for dashboard
   async openCard(cardName, expectedUrl) {
-   const card = this.page.locator(`a.sh-kpi-card[href*="${expectedUrl}"]`);
+    const card = this.page.locator(`a.sh-kpi-card[href*="${expectedUrl}"]`);
 
     await expect(card).toBeVisible();
 
@@ -55,7 +70,7 @@ class DashboardPage {
     console.log(`Opened: ${cardName}`);
   }
 
- // Verify Medical History Graph
+  // Verify Medical History Graph
   async verifyMedicalHistory() {
     await expect(this.medicalHistoryHeading).toBeVisible();
     await expect(this.medicalHistoryChart).toBeVisible();
@@ -76,6 +91,18 @@ class DashboardPage {
   async clickBookAppointmentFromWidget() {
     await this.bookAppointmentButton.click();
     await expect(this.page).toHaveURL(/patient\/dashboard\/appointment/);
+  }
+
+  // Verify Top 10 Findings
+  async verifyTop10Findings() {
+    await expect(this.top10FindingsHeading).toBeVisible();
+    await expect(this.top10FindingsChart).toBeVisible();
+  }
+
+  // Verify Top 10 Symptoms
+  async verifyTop10Symptoms() {
+    await expect(this.top10SymptomsHeading).toBeVisible();
+    await expect(this.top10SymptomsChart).toBeVisible();
   }
 }
 

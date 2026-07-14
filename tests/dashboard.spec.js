@@ -26,7 +26,7 @@ test("Verify Dashboard KPI Cards", async ({ page }) => {
 
     await page.goBack();
   }
-}); 
+});
 
 test("Verify Medical History Graph", async ({ page }) => {
   const dashboard = new DashboardPage(page);
@@ -46,4 +46,22 @@ test("Verify Upcoming Appointments - Book Appointment", async ({ page }) => {
 
   await dashboard.verifyUpcomingAppointments();
   await dashboard.clickBookAppointmentFromWidget();
+});
+
+test("Verify Dashboard Charts", async ({ page }) => {
+  const dashboard = new DashboardPage(page);
+
+  await dashboard.verifyTop10Findings();
+  await dashboard.verifyTop10Symptoms();
+});
+test("Verify Top 10 Findings", async ({ page }) => {
+  const dashboard = new DashboardPage(page);
+
+  await dashboard.verifyTop10Findings();
+});
+
+test("Verify Top 10 Symptoms", async ({ page }) => {
+  const dashboard = new DashboardPage(page);
+
+  await dashboard.verifyTop10Symptoms();
 });
