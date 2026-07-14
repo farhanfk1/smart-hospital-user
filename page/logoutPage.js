@@ -1,3 +1,4 @@
+const { expect } = require("@playwright/test");
 class LogoutPage {
   constructor(page) {
     this.page = page;
@@ -11,14 +12,15 @@ class LogoutPage {
 
   async logout() {
     // Open the dropdown
-    
+   await expect(this.profileDropdown).toBeVisible();
     await this.profileDropdown.click();
 
     // Click Logout
+    await expect(this.logoutButton).toBeVisible();
     await this.logoutButton.click();
 
     // Wait for login page
-    await this.page.waitForURL("**/site/userlogin");
+    await expect(this.page).toHaveURL(/site\/userlogin/);
   }
 }
 
