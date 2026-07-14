@@ -22,7 +22,7 @@ class DashboardPage {
     await expect(this.page).toHaveURL(/patient\/dashboard\/appointment/);
   }
 
-  // for dashboard kpi
+  // for dashboard 
   async openCard(cardName, expectedUrl) {
    const card = this.page.locator(`a.sh-kpi-card[href*="${expectedUrl}"]`);
 
