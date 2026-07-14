@@ -13,9 +13,9 @@ class DashboardPage {
     this.bookAppointmentButton = page.locator("a.btn-pulse");
 
     // Medical History
-   this.medicalHistoryHeading = page.getByText("Medical History", {
-     exact: true,
-   });
+    this.medicalHistoryHeading = page.getByText("Medical History", {
+      exact: true,
+    });
 
     this.medicalHistoryChart = page.locator("#medical-history-chart");
 
@@ -28,9 +28,22 @@ class DashboardPage {
       name: "View All",
     });
 
-    this.bookAppointmentButton = page.getByRole("link", {
-      name: /Book Appointment/,
-    }).last();
+    this.bookAppointmentButton = page
+      .getByRole("link", {
+        name: /Book Appointment/,
+      })
+      .last();
+
+    // top 10 findings
+    this.top10Findings = page.getByText("Top 10 Findings", {
+      exact: true,
+    });
+    this.findingsChart = page.locator("#finding-bar-chart");
+    // top 10 symptoms
+    this.top10Symptoms = page.getByText("Top 10 Symptoms", {
+      exact: true,
+    });
+    this.symptomsChart = page.locator("#symptom-bar-chart");
   }
 
   async verifyDashboard() {
@@ -42,9 +55,9 @@ class DashboardPage {
     await expect(this.page).toHaveURL(/patient\/dashboard\/appointment/);
   }
 
-  // for dashboard 
+  // for dashboard
   async openCard(cardName, expectedUrl) {
-   const card = this.page.locator(`a.sh-kpi-card[href*="${expectedUrl}"]`);
+    const card = this.page.locator(`a.sh-kpi-card[href*="${expectedUrl}"]`);
 
     await expect(card).toBeVisible();
 
@@ -55,7 +68,7 @@ class DashboardPage {
     console.log(`Opened: ${cardName}`);
   }
 
- // Verify Medical History Graph
+  // Verify Medical History Graph
   async verifyMedicalHistory() {
     await expect(this.medicalHistoryHeading).toBeVisible();
     await expect(this.medicalHistoryChart).toBeVisible();
@@ -76,6 +89,15 @@ class DashboardPage {
   async clickBookAppointmentFromWidget() {
     await this.bookAppointmentButton.click();
     await expect(this.page).toHaveURL(/patient\/dashboard\/appointment/);
+  }
+  async verifyTop10Findings() {
+    await expect(this.top10Findings).toBeVisible();
+    await expect(this.findingsChart).toBeVisible();
+  }
+
+  async verifyTop10Symptoms() {
+    await expect(this.top10Symptoms).toBeVisible();
+    await expect(this.symptomsChart).toBeVisible();
   }
 }
 

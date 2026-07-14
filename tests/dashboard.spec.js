@@ -47,3 +47,10 @@ test("Verify Upcoming Appointments - Book Appointment", async ({ page }) => {
   await dashboard.verifyUpcomingAppointments();
   await dashboard.clickBookAppointmentFromWidget();
 });
+
+test("Verify Dashboard Charts", async ({ page }) => {
+  const dashboard = new DashboardPage(page);
+
+  await dashboard.verifyTop10Findings();
+  await dashboard.verifyTop10Symptoms();
+});
